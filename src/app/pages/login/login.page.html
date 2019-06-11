@@ -5,5 +5,46 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-button expand="block" routerLink="/menu" routerDirection="root">Login</ion-button>
+
+    <form [formGroup]="formulario">
+
+        <ion-item>
+            <ion-label position="floating" >Usuário:</ion-label>
+            <ion-input type="text" formControlName="username" ></ion-input>
+            <div *ngIf="formulario.controls.username.touched && formulario.controls.username.errors">
+                <p *ngIf="formulario.controls.username.errors.required">
+                    Campo obrigatório
+                </p>
+            </div>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating" >Senha:</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+            <div *ngIf="formulario.controls.password.touched && formulario.controls.password.errors">
+                <p *ngIf="formulario.controls.password.errors.required">
+                    Campo obrigatório
+                </p>
+            </div>
+        </ion-item>
+
+        <div align="center" >
+            <p>
+                <a [routerLink]="['/login/esqueci-minha-senha']">esqueci minha senha</a>
+            </p>
+        </div>
+
+    </form>
+
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-button (click)="submitForm()" [disabled]="!formulario.valid" expand="full">Enviar</ion-button>
+    </ion-toolbar>
+</ion-footer>
+
+<!--
+<ion-content padding>
+    <ion-button expand="block" routerLink="/menu" routerDirection="root">Login</ion-button>
+</ion-content>-->

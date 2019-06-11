@@ -10,6 +10,7 @@ const routes: Routes = [
     {path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule'},
     {path: 'details/:myid', loadChildren: './pages/details/details.module#DetailsPageModule', canActivate: [AuthGuard]},
     {path: 'menu/crud', loadChildren: './pages/crud/crud.module#CrudPageModule'},
+    // { path: 'esqueci-senha', loadChildren: './pages/login/esqueci-senha/esqueci-senha.module#EsqueciSenhaPageModule' },
     /*Tem que ser o ultimo path configurado*/
     {path: '**', loadChildren: './pages/not-found/not-found.module#NotFoundPageModule'}
 ];
