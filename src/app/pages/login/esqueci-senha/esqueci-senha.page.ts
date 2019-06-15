@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {AuthService} from '../../../providers/auth.service';
 
 @Component({
     selector: 'app-esqueci-senha',
@@ -13,7 +14,8 @@ export class EsqueciSenhaPage implements OnInit {
     public formulario: FormGroup;
 
     constructor(private fBuilder: FormBuilder,
-                private rota: Router) {
+                private rota: Router,
+                private auth: AuthService) {
 
         this.router = rota;
 
@@ -32,6 +34,9 @@ export class EsqueciSenhaPage implements OnInit {
 
     submitForm() {
         console.log(this.formulario.value);
+
+        this.auth.includeUser( this.formulario.controls.username.value, this.formulario.controls.password.value);
+
         this.router.navigate(['/login']);
     }
 

@@ -14,8 +14,9 @@ export class AuthService {
     isUserValid(username: String, password: String): boolean {
 
         console.log('username: ' + username + ' password: ' + password);
+        console.log( 'usersAndPasswords: ' +  JSON.stringify( this.usersAndPasswords ) );
 
-        if (!username && !password) {
+        if (!username || !password) {
             return false;
         }
 
@@ -27,4 +28,18 @@ export class AuthService {
         console.log('isValid: ' + isValid)
         return isValid;
     }
+
+    includeUser(username: string, password: string) {
+
+        console.log('Including: ' +  username + ' - ' + password );
+
+        if (!username || !password) {
+            return;
+        }
+
+        this.usersAndPasswords.push( { username:username, password:password } );
+
+        console.log( 'usersAndPasswords: ' +  JSON.stringify( this.usersAndPasswords ) );
+    }
+
 }
