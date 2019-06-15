@@ -1,9 +1,49 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>esqueci-senha</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>esqueci-senha</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  esqueci-senha
+<ion-content padding>
+
+    <form [formGroup]="formulario">
+
+        <ion-item>
+            <ion-label position="floating">Usuário:</ion-label>
+            <ion-input type="text" formControlName="username"></ion-input>
+            <div *ngIf="formulario.controls.username.touched && formulario.controls.username.errors">
+                <p *ngIf="formulario.controls.username.errors.required">
+                    Campo obrigatório
+                </p>
+            </div>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Senha:</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+            <div *ngIf="formulario.controls.password.touched && formulario.controls.password.errors">
+                <p *ngIf="formulario.controls.password.errors.required">
+                    Campo obrigatório
+                </p>
+            </div>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Confirme a senha:</ion-label>
+            <ion-input type="password" formControlName="confirmPassword"></ion-input>
+            <div *ngIf="formulario.controls.confirmPassword.touched && formulario.controls.confirmPassword.errors">
+                <p *ngIf="formulario.controls.confirmPassword.errors.required">
+                    Campo obrigatório
+                </p>
+            </div>
+        </ion-item>
+    </form>
+
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-button (click)="submitForm()" [disabled]="!formulario.valid" expand="full">Enviar</ion-button>
+        <ion-button (click)="log()" expand="full">Log</ion-button>
+    </ion-toolbar>
+</ion-footer>
