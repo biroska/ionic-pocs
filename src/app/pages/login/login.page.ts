@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {AuthService} from '../../providers/auth.service';
+import {ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-login',
@@ -11,12 +13,15 @@ export class LoginPage implements OnInit {
 
     private router: Router;
     public formulario: FormGroup;
+    public authService: AuthService;
 
     constructor(private fBuilder: FormBuilder,
-                private rota: Router) {
+                private rota: Router,
+                private auth: AuthService,
+                public toastController: ToastController) {
 
         this.router = rota;
-
+        this.authService = auth;
         this.formulario = this.fBuilder.group(
             {
                 username:['', Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(10)])],
@@ -33,7 +38,26 @@ export class LoginPage implements OnInit {
 
     submitForm() {
         console.log(this.formulario.value);
-        this.router.navigate(['/menu']);
+
+        let isAuthenticated: boolean = this.authService.isUserValid( this.formulario.controls.username.value, this.formulario.controls.password.value );
+
+        if ( isAuthenticated ) {
+            this.router.navigate(['/menu']);
+        } else {
+            this.formulario.setErrors({'incorrect':true})
+            this.presentToast( 'Login e senha inválidos', 3000 );
+        }
+    }
+
+    async presentToast( message:string, duration:number ) {
+
+        const toast = await this.toastController.create({
+            message: message,
+            duration: duration,
+            position: 'middle',
+            color: 'danger'
+        });
+        toast.present();
     }
 
 }
