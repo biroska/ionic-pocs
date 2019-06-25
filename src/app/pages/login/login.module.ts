@@ -6,7 +6,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {LoginPage} from './login.page';
 import {ReactiveFormsModule} from '@angular/forms';
-import {CrudPage} from '../crud/crud.page';
+import {MaterialModule} from '../../shared/material/material.module';
 
 const routes: Routes = [
     { path: '', component: LoginPage },
@@ -18,6 +18,7 @@ const routes: Routes = [
         CommonModule,
         IonicModule,
         ReactiveFormsModule,
+        MaterialModule,
         RouterModule.forChild(routes)
     ],
     declarations: [LoginPage]

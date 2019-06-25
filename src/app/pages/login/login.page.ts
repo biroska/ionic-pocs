@@ -3,13 +3,14 @@ import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../providers/auth.service';
 import {ToastController} from '@ionic/angular';
+import {ValidatorCommomErrors} from '../../shared/errors/ValidatorCommomErrors';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage extends ValidatorCommomErrors implements OnInit {
 
     private router: Router;
     public formulario: FormGroup;
@@ -19,15 +20,33 @@ export class LoginPage implements OnInit {
                 private rota: Router,
                 private auth: AuthService,
                 public toastController: ToastController) {
-
+        super();
         this.router = rota;
         this.authService = auth;
         this.formulario = this.fBuilder.group(
             {
                 username:['', Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(10)])],
-                password:['', Validators.compose([Validators.required])]
+                password:['', Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(10)])]
             }
         );
+    }
+
+    getErrorMessage( group:FormGroup ) {
+
+        for (let key in group.errors ) {
+
+            console.log('Keys: ' +  key );
+
+            if ( group.errors[key] ){
+                let resul = super.getMessage( key );
+
+                console.log('Resul: ' + resul );
+
+                return resul;
+            }
+        }
+
+        return '';
     }
 
     ngOnInit() {

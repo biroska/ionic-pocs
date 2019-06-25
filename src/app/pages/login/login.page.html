@@ -8,27 +8,19 @@
 
     <form [formGroup]="formulario">
 
-        <ion-item>
-            <ion-label position="floating" >Usuário:</ion-label>
-            <ion-input type="text" formControlName="username" ></ion-input>
-            <div *ngIf="formulario.controls.username.touched && formulario.controls.username.errors">
-                <p *ngIf="formulario.controls.username.errors.required">
-                    Campo obrigatório
-                </p>
-            </div>
-        </ion-item>
+        <mat-form-field appearance="outline" >
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Informe o usuário" type="text" formControlName="username" required>
+            <mat-error *ngIf="formulario.controls.username.invalid">{{getErrorMessage(formulario.controls.username)}}</mat-error>
+        </mat-form-field>
 
-        <ion-item>
-            <ion-label position="floating" >Senha:</ion-label>
-            <ion-input type="password" formControlName="password"></ion-input>
-            <div *ngIf="formulario.controls.password.touched && formulario.controls.password.errors">
-                <p *ngIf="formulario.controls.password.errors.required">
-                    Campo obrigatório
-                </p>
-            </div>
-        </ion-item>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Informe a senha" type="password" formControlName="password" required>
+            <mat-error *ngIf="formulario.controls.password.invalid">{{getErrorMessage(formulario.controls.password)}}</mat-error>
+        </mat-form-field>
 
-        <div align="center" >
+        <div align="center">
             <p>
                 <a [routerLink]="['/login/esqueci-minha-senha']">esqueci minha senha</a>
             </p>
