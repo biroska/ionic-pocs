@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../providers/auth.service';
+import {ValidatorCommomErrors} from '../../../shared/errors/ValidatorCommomErrors';
 
 @Component({
     selector: 'app-esqueci-senha',
     templateUrl: './esqueci-senha.page.html',
     styleUrls: ['./esqueci-senha.page.scss'],
 })
-export class EsqueciSenhaPage implements OnInit {
+export class EsqueciSenhaPage extends ValidatorCommomErrors implements OnInit {
 
     private router: Router;
     public formulario: FormGroup;
@@ -16,21 +17,19 @@ export class EsqueciSenhaPage implements OnInit {
     constructor(private fBuilder: FormBuilder,
                 private rota: Router,
                 private auth: AuthService) {
-
+        super();
         this.router = rota;
 
         this.formulario = this.fBuilder.group(
             {
                 username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])],
-                password: ['', Validators.compose([Validators.required])],
-                confirmPassword: ['', Validators.compose([Validators.required])],
+                password: ['',  Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])],
+                confirmPassword: ['',  Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])]
             }
         );
-
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     submitForm() {
         console.log(this.formulario.value);

@@ -31,24 +31,6 @@ export class LoginPage extends ValidatorCommomErrors implements OnInit {
         );
     }
 
-    getErrorMessage( group:FormGroup ) {
-
-        for (let key in group.errors ) {
-
-            console.log('Keys: ' +  key );
-
-            if ( group.errors[key] ){
-                let resul = super.getMessage( key );
-
-                console.log('Resul: ' + resul );
-
-                return resul;
-            }
-        }
-
-        return '';
-    }
-
     ngOnInit() {
         // setTimeout(() => {
         //     this.formulario.get('username').setValue('mocked');

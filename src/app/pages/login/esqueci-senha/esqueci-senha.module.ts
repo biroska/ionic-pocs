@@ -6,6 +6,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 
 import {EsqueciSenhaPage} from './esqueci-senha.page';
+import {MaterialModule} from '../../../shared/material/material.module';
 
 const routes: Routes = [
     {
@@ -19,6 +20,7 @@ const routes: Routes = [
         CommonModule,
         ReactiveFormsModule,
         IonicModule,
+        MaterialModule,
         RouterModule.forChild(routes)
     ],
     declarations: [EsqueciSenhaPage]
