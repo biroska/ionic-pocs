@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../providers/auth.service';
 import {ValidatorCommomErrors} from '../../../shared/errors/ValidatorCommomErrors';
+import {recuperarPassword} from '../../../validators/recuperarPassword.validator.directive';
 
 @Component({
     selector: 'app-esqueci-senha',
@@ -24,10 +25,22 @@ export class EsqueciSenhaPage extends ValidatorCommomErrors implements OnInit {
             {
                 username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])],
                 password: ['',  Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])],
-                confirmPassword: ['',  Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])]
+                confirmPassword: ['',  Validators.compose([ Validators.required,
+                                                            Validators.minLength(3),
+                                                            Validators.maxLength(10),
+                                                            recuperarPassword( this.formulario.controls.password.value, this.formulario.controls.confirmPassword.value )  ] ) ]
             }
         );
     }
+
+    // function ageRangeValidator(min: string, max: string): ValidatorFn {
+    //     return (control: AbstractControl): { [key: string]: boolean } | null => {
+    //         if (control.value !== undefined || control.value < min || control.value > max)) {
+    //             return { 'ageRange': true };
+    //         }
+    //         return null;
+    //     };
+    // }
 
     ngOnInit() {}
 
