@@ -61,4 +61,9 @@ export class LoginPage extends ValidatorCommomErrors implements OnInit {
         toast.present();
     }
 
+    protected registerMessages(){
+        console.log('===========================================================');
+        console.log('=               INVOKADO NA CLASSE FILHA                  =');
+        console.log('===========================================================');
+    }
 }

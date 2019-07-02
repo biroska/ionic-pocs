@@ -94,6 +94,12 @@ export class EsqueciSenhaPage extends ValidatorCommomErrors implements OnInit {
         this.router.navigate(['/login']);
     }
 
+    protected registerMessages(){
+        console.log('===========================================================');
+        console.log('=               INVOKADO NA CLASSE FILHA                  =');
+        console.log('===========================================================');
+    }
+
     log() {
         console.log(this.formulario.value);
         console.log(this.formulario.valid);

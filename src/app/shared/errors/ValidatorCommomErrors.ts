@@ -8,12 +8,14 @@ export abstract class ValidatorCommomErrors {
     private errorTypeMessages: ErrorMessage[];
 
     constructor() {
-
+// TODO: Extrair esse cache para um provider
         this.errorTypeMessages = [ new ErrorMessage( 'required', 'Campo obrigatório' ) ];
 
         this.errorTypeMessages.push( new ErrorMessage( 'minlength', 'Quantidade mínima de caracteres "3"' ) );
 
         this.errorTypeMessages.push( new ErrorMessage( 'maxlength', 'Quantidade máxima de caracteres "10"' ) );
+
+        this.registerMessages();
     }
 
     protected getErrorMessage( group:FormGroup ) {
@@ -51,8 +53,11 @@ export abstract class ValidatorCommomErrors {
         return 'Mensagem de erro não definida';
     }
 
-    protected addErrorMessage(){
-        // TODO Implementar
+    protected abstract registerMessages();
+
+    protected addErrorMessage( key:string, errorMessage:string ){
+
+        this.errorTypeMessages.push( new ErrorMessage( key, errorMessage ) );
     }
 
 }
