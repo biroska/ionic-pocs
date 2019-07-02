@@ -1,4 +1,4 @@
-import {AbstractControl, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 export class PasswordValidator {
 
@@ -23,3 +23,29 @@ export class PasswordValidator {
         };
     }
 }
+
+//
+// function passwordsIguais(form: FormControl) {
+//
+//     console.log('passwordsIguais: ' + form );
+//
+//     if ( !form ) {
+//         return;
+//     }
+//
+//     const password = form.get('password');
+//     const confirmPassword = form.get('confirmPassword');
+//
+//     let email = form.value;
+//     if (email && email.indexOf("@") != -1) {
+//         let [_, domain] = email.split("@");
+//         if (domain !== "codecraft.tv") {
+//             return {
+//                 emailDomain: {
+//                     parsedDomain: domain
+//                 }
+//             }
+//         }
+//     }
+//     return null;
+// }
