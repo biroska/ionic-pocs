@@ -34,7 +34,7 @@ function emailDomainValidator(control: FormControl) {
 
 function gambetaDaPorra( param1:string, param2:string ): ValidatorFn {
 
-    return (control: AbstractControl): { [key: string]: any } => {
+    return (control: AbstractControl): { [key: string]: boolean | null } => {
 
         let param1Value:string;
         let param2Value:string;
@@ -47,12 +47,16 @@ function gambetaDaPorra( param1:string, param2:string ): ValidatorFn {
             param1Value = FunctionUtils.getValue( control.parent, param1);
             param2Value = FunctionUtils.getValue( control.parent, param2);
 
-            console.log('control.parent1: ' + param1Value );
-            console.log('control.parent2: ' + param2Value );
         }
         const isEquals = param1Value === param2Value;
 
-        return isEquals ? { 'confirmPassword': { value: 'Os passwords são diferentes' } } : null;
+        console.log('param1Value: ' + param1Value + ' param2Value: ' + param2Value + ' isEquals: ' + isEquals );
+
+        if ( !isEquals ){
+            return { 'confirmPassword': true };
+        }
+
+        return null;
     };
 }
 
@@ -98,9 +102,12 @@ export class EsqueciSenhaPage extends ValidatorCommomErrors implements OnInit {
         console.log('===========================================================');
         console.log('=               INVOKADO NA CLASSE FILHA                  =');
         console.log('===========================================================');
+
+        super.addErrorMessage(  'confirmPassword', 'Os passwords são diferentes' );
     }
 
     log() {
+        super.viewErrorMessages();
         console.log(this.formulario.value);
         console.log(this.formulario.valid);
         console.log(this.formulario.controls.username.errors);

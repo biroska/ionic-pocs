@@ -18,16 +18,18 @@ export abstract class ValidatorCommomErrors {
         this.registerMessages();
     }
 
+    protected abstract registerMessages();
+
     protected getErrorMessage( group:FormGroup ) {
 
         for (let key in group.errors ) {
 
-            console.log('Keys: ' +  key );
+            // console.log('Keys: ' +  key );
 
             if ( group.errors[key] ){
                 let resul = this.getMessage( key );
 
-                console.log('Resul: ' + resul );
+                // console.log('Resul: ' + resul );
 
                 return resul;
             }
@@ -53,11 +55,16 @@ export abstract class ValidatorCommomErrors {
         return 'Mensagem de erro não definida';
     }
 
-    protected abstract registerMessages();
-
     protected addErrorMessage( key:string, errorMessage:string ){
 
         this.errorTypeMessages.push( new ErrorMessage( key, errorMessage ) );
     }
 
+
+    protected viewErrorMessages(){
+
+        for (let key in this.errorTypeMessages ) {
+            console.log('key: ' + this.errorTypeMessages[key].getError() + ' Message: ' + this.errorTypeMessages[key].getMessage() );
+        }
+    }
 }
