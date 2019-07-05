@@ -1,38 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../providers/auth.service';
 import {ValidatorCommomErrors} from '../../../shared/errors/ValidatorCommomErrors';
-import {recuperarPassword} from '../../../validators/recuperarPassword.validator.directive';
-import {FormArray} from '@angular/forms/src/model';
-import {FunctionUtils} from '../../../shared/functions/FunctionUtils';
+import {FunctionUtils} from "../../../shared/functions/FunctionUtils";
 
-function emailDomainValidator(control: FormControl) {
-
-    console.log('control.value: ' + control.value );
-    console.log('control.parent: ' + control.parent );
-
-    if ( control.parent ){
-        console.log('control.parent0: ' + control.parent.toString() );
-        console.log('control.parent1: ' + control.parent.value );
-        console.log('control.parent3: ' + control.parent.get('username').value );
-    }
-
-    let email = control.value;
-    if (email && email.indexOf("@") != -1) {
-        let [_, domain] = email.split("@");
-        if (domain !== "codecraft.tv") {
-            return {
-                emailDomain: {
-                    parsedDomain: domain
-                }
-            }
-        }
-    }
-    return null;
-}
-
-function gambetaDaPorra( param1:string, param2:string ): ValidatorFn {
+function areParametersDifferent( param1:string, param2:string ): ValidatorFn {
 
     return (control: AbstractControl): { [key: string]: boolean | null } => {
 
@@ -53,7 +26,7 @@ function gambetaDaPorra( param1:string, param2:string ): ValidatorFn {
         console.log('param1Value: ' + param1Value + ' param2Value: ' + param2Value + ' isEquals: ' + isEquals );
 
         if ( !isEquals ){
-            return { 'confirmPassword': true };
+            return { 'differentParameters': true };
         }
 
         return null;
@@ -83,7 +56,7 @@ export class EsqueciSenhaPage extends ValidatorCommomErrors implements OnInit {
                 confirmPassword: ['',  Validators.compose([ Validators.required,
                                                             Validators.minLength(3),
                                                             Validators.maxLength(10),
-                                                            gambetaDaPorra( 'password', 'confirmPassword' )  ] ) ]
+                                                            areParametersDifferent( 'password', 'confirmPassword' )  ] ) ]
             }
         );
     }
@@ -103,7 +76,7 @@ export class EsqueciSenhaPage extends ValidatorCommomErrors implements OnInit {
         console.log('=               INVOKADO NA CLASSE FILHA                  =');
         console.log('===========================================================');
 
-        super.addErrorMessage(  'confirmPassword', 'Os passwords são diferentes' );
+        super.addErrorMessage(  'differentParameters', 'Os passwords são diferentes' );
     }
 
     log() {
