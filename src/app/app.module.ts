@@ -10,6 +10,7 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthGuard} from './guards/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         AuthGuard,
         StatusBar,
         SplashScreen,
+        FingerprintAIO,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

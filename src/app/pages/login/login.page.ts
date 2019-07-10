@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../providers/auth.service';
 import {ToastController} from '@ionic/angular';
 import {ValidatorCommomErrors} from '../../shared/errors/ValidatorCommomErrors';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 
 @Component({
     selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginPage extends ValidatorCommomErrors implements OnInit {
     constructor(private fBuilder: FormBuilder,
                 private rota: Router,
                 private auth: AuthService,
-                public toastController: ToastController) {
+                public toastController: ToastController,
+                private faio: FingerprintAIO ) {
         super();
         this.router = rota;
         this.authService = auth;
@@ -59,6 +61,19 @@ export class LoginPage extends ValidatorCommomErrors implements OnInit {
             color: 'danger'
         });
         toast.present();
+    }
+
+    public loginWithFingerPrint() {
+        this.faio.show({
+            clientId: 'Fingerprint-Demo',
+            clientSecret: 'o7aoOMYUbyxaD23oFAnJ', // Only Android -- 'password'
+            localizedFallbackTitle: 'Use Pin', // Only iOS
+            localizedReason: 'Please authenticate' // Only iOS
+        })
+            .then((result: any) => console.log(result))
+            .catch((error: any) => {
+                console.log('err: ', error);
+            });
     }
 
     protected registerMessages(){

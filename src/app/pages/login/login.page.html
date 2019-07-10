@@ -19,8 +19,13 @@
             <input matInput placeholder="Informe a senha" type="password" formControlName="password" required>
             <mat-error *ngIf="formulario.controls.password.invalid">{{getErrorMessage(formulario.controls.password)}}</mat-error>
         </mat-form-field>
+        <div align="center" class="full-width">
+            <p>
+                <ion-icon name="finger-print" style="font-size: 120px;" (click)="loginWithFingerPrint()" ></ion-icon>
+            </p>
+        </div>
 
-        <div align="center">
+        <div align="center" class="full-width">
             <p>
                 <a [routerLink]="['/login/esqueci-minha-senha']">esqueci minha senha</a>
             </p>
