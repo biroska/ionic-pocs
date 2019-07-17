@@ -19,7 +19,7 @@
             <input matInput placeholder="Informe a senha" type="password" formControlName="password" required>
             <mat-error *ngIf="formulario.controls.password.invalid">{{getErrorMessage(formulario.controls.password)}}</mat-error>
         </mat-form-field>
-        <div align="center" class="full-width">
+        <div align="center" class="full-width" *ngIf="fingerPrintAvailable" >
             <p>
                 <ion-icon name="finger-print" style="font-size: 120px;" (click)="loginWithFingerPrint()" ></ion-icon>
             </p>

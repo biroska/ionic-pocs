@@ -17,6 +17,8 @@ export class LoginPage extends ValidatorCommomErrors implements OnInit {
     public formulario: FormGroup;
     public authService: AuthService;
 
+    public fingerPrintAvailable: boolean;
+
     constructor(private fBuilder: FormBuilder,
                 private rota: Router,
                 private auth: AuthService,
@@ -31,13 +33,24 @@ export class LoginPage extends ValidatorCommomErrors implements OnInit {
                 password:['', Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(10)])]
             }
         );
+
+        this.showFingerPrintControll();
     }
 
-    ngOnInit() {
-        // setTimeout(() => {
-        //     this.formulario.get('username').setValue('mocked');
-        // }, 2000);
+    private showFingerPrintControll() {
+
+        this.faio.isAvailable()
+            .then((result: any) => {
+                this.fingerPrintAvailable = true;
+                console.log('this.faio.isAvailable.then: ' + this.fingerPrintAvailable);
+            })
+            .catch((error: any) => {
+                this.fingerPrintAvailable = false;
+                console.log('this.faio.isAvailable.catch: ' + this.fingerPrintAvailable);
+            });
     }
+
+    ngOnInit() {}
 
     submitForm() {
         console.log(this.formulario.value);
@@ -64,16 +77,22 @@ export class LoginPage extends ValidatorCommomErrors implements OnInit {
     }
 
     public loginWithFingerPrint() {
-        this.faio.show({
-            clientId: 'Fingerprint-Demo',
-            clientSecret: 'o7aoOMYUbyxaD23oFAnJ', // Only Android -- 'password'
-            localizedFallbackTitle: 'Use Pin', // Only iOS
-            localizedReason: 'Please authenticate' // Only iOS
-        })
-            .then((result: any) => console.log(result))
-            .catch((error: any) => {
-                console.log('err: ', error);
-            });
+
+        if (this.faio.isAvailable()) {
+
+            this.faio.show({
+                clientId: 'Fingerprint-Demo',
+                clientSecret: 'o7aoOMYUbyxaD23oFAnJ',   // Only Android -- 'password'
+                localizedFallbackTitle: 'Use Pin',      // Only iOS
+                localizedReason: 'Please authenticate' // Only iOS
+            })
+                .then((result: any) => this.router.navigate(['/menu']))
+                .catch((error: any) => {
+                    console.log('err: ', this.presentToast( 'Impressão digital não disponível neste dispositivo: ' + error, 3000 ));
+                });
+        } else {
+            this.presentToast( 'Impressão digital não disponível neste dispositivo', 3000 );
+        }
     }
 
     protected registerMessages(){
