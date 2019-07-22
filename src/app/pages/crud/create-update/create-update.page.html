@@ -1,9 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>create-update</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>create-update</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <form [formGroup]="stepperFormGroup" #stepper>
+        <mat-horizontal-stepper formArrayName="formArray" >
+            <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
+                <ng-template matStepLabel>Fill out your name</ng-template>
+                <mat-form-field>
+                    <input matInput placeholder="Last name" formControlName="name" required>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext type="button">Next</button>
+                </div>
+            </mat-step>
+            <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
+                <ng-template matStepLabel>Fill out your address</ng-template>
+                <mat-form-field>
+                    <input matInput placeholder="Address" formControlName="address" required>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperPrevious type="button">Back</button>
+                    <button mat-button matStepperNext type="button">Next</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                You are now done.
+                <div>
+                    <button mat-button matStepperPrevious type="button">Back</button>
+                    <button mat-button (click)="stepper.reset()" type="button">Reset</button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </form>
 </ion-content>

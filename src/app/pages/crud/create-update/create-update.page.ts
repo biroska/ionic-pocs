@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-create-update',
-  templateUrl: './create-update.page.html',
-  styleUrls: ['./create-update.page.scss'],
+    selector: 'app-create-update',
+    templateUrl: './create-update.page.html',
+    styleUrls: ['./create-update.page.scss'],
 })
 export class CreateUpdatePage implements OnInit {
 
-  constructor() { }
+    public stepperFormGroup: FormGroup;
 
-  ngOnInit() {
-  }
+    constructor(private fBuilder: FormBuilder) {
+    }
+
+    ngOnInit() {
+        this.stepperFormGroup = this.fBuilder.group({
+            formArray: this.fBuilder.array([
+                this.fBuilder.group({ name: ['', Validators.required] }),
+                this.fBuilder.group({ address: ['', Validators.required] }),
+                this.fBuilder.group({})
+            ])
+        });
+    }
 
 }
