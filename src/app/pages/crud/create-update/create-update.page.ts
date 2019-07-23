@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatStepper} from '@angular/material';
 
 @Component({
     selector: 'app-create-update',
@@ -10,8 +11,7 @@ export class CreateUpdatePage implements OnInit {
 
     public stepperFormGroup: FormGroup;
 
-    constructor(private fBuilder: FormBuilder) {
-    }
+    constructor(private fBuilder: FormBuilder) {}
 
     ngOnInit() {
         this.stepperFormGroup = this.fBuilder.group({
@@ -22,5 +22,4 @@ export class CreateUpdatePage implements OnInit {
             ])
         });
     }
-
 }
