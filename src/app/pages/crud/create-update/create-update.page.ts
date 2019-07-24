@@ -16,8 +16,10 @@ export class CreateUpdatePage implements OnInit {
     ngOnInit() {
         this.stepperFormGroup = this.fBuilder.group({
             formArray: this.fBuilder.array([
-                this.fBuilder.group({ name: ['', Validators.required] }),
-                this.fBuilder.group({ address: ['', Validators.required] }),
+                this.fBuilder.group({ cpf: ['', Validators.required],
+                                                   name: ['', Validators.required] }),
+                this.fBuilder.group({ cep: ['', Validators.required],
+                                                    address: ['', Validators.required] }),
                 this.fBuilder.group({})
             ])
         });
