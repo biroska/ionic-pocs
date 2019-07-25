@@ -17,6 +17,18 @@
                     <mat-label>Nome</mat-label>
                     <input matInput placeholder="Forneça o nome" formControlName="name" required>
                 </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Data de Nascimento</mat-label>
+                    <input matInput placeholder="Forneça a data de nascimento" formControlName="dob" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput placeholder="Forneça o telefone de contato" formControlName="telephoneNumber" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>e-mail</mat-label>
+                    <input matInput placeholder="Forneça o e-mail de contato" formControlName="email" required>
+                </mat-form-field>
                 <div>
                     <button mat-button matStepperNext type="button">Next</button>
                 </div>
@@ -30,6 +42,22 @@
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Logradouro</mat-label>
                     <input matInput placeholder="Informe o logradouro" formControlName="address" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Número</mat-label>
+                    <input matInput placeholder="Informe o número" formControlName="addressNumber" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Bairro</mat-label>
+                    <input matInput placeholder="Informe o bairro" formControlName="district" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Cidade</mat-label>
+                    <input matInput placeholder="Informe a cidade" formControlName="city" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Estado</mat-label>
+                    <input matInput placeholder="Informe o estado" formControlName="state" required>
                 </mat-form-field>
                 <div>
                     <button mat-button matStepperPrevious type="button">Back</button>
