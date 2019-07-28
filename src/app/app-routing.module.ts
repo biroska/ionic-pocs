@@ -13,6 +13,7 @@ const routes: Routes = [
     // { path: 'esqueci-senha', loadChildren: './pages/login/esqueci-senha/esqueci-senha.module#EsqueciSenhaPageModule' },
     /*Tem que ser o ultimo path configurado*/
     {path: '**', loadChildren: './pages/not-found/not-found.module#NotFoundPageModule'}
+
 ];
 
 @NgModule({
