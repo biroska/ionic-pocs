@@ -47,7 +47,7 @@ export class CreateUpdatePage implements OnInit {
         let cep = this.stepperFormGroup.get('formArray').get([1]).get('cep').value;
 
             if ( cep.length === 9 ){
-                this.buscarCep( cep );
+                this.buscarCepPromise( cep );
             }
 
         });
@@ -57,9 +57,30 @@ export class CreateUpdatePage implements OnInit {
 
         let cepResponse:CepServiceResponse;
 
-        return this.cepService.getCepAsync( cep ).subscribe((response: {}) => {
+        return this.cepService.getCepObservable( cep ).subscribe((response: {}) => {
 
-            console.log()
+            console.log( response );
+
+            cepResponse = ( response as CepServiceResponse );
+
+            let formEndereco: AbstractControl | null = this.stepperFormGroup.get('formArray').get([1]);
+
+            formEndereco.get('cep').setValue( cepResponse.cep );
+            formEndereco.get('address').setValue( cepResponse.endereco );
+            formEndereco.get('district').setValue( cepResponse.bairro );
+            formEndereco.get('city').setValue( cepResponse.cidade );
+            formEndereco.get('state').setValue( cepResponse.uf );
+
+        })
+
+    }
+    public buscarCepPromise(cep:string ) {
+        let cepResponse:CepServiceResponse;
+
+        return this.cepService.getCepPromise( cep ).then((response: {}) => {
+
+
+            console.log( response );
 
             cepResponse = ( response as CepServiceResponse );
 

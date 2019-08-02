@@ -20,11 +20,19 @@ export class CepService extends ServiceHandleError {
         return this.http.get( CEP.BASE_API_PATH + cep +"/" + "?" + CEP.CEP_KEY + "&" + CEP.CEP_SECRET );
     }
 
-    getCepAsync( cep:string ): Observable<CepServiceResponse> {
+    getCepObservable( cep:string ): Observable<CepServiceResponse> {
         return ( this.http.get( CEP.BASE_API_PATH + cep +"/" + "?" + CEP.CEP_KEY + "&" + CEP.CEP_SECRET ) as Observable<CepServiceResponse> )
             .pipe(
                 retry(1),
                 catchError( super.handleError )
             )
+    }
+
+    getCepPromise(cep:string ):Promise<CepServiceResponse>{
+
+        return this.http.get( CEP.BASE_API_PATH + cep +"/" + "?" + CEP.CEP_KEY + "&" + CEP.CEP_SECRET ).toPromise()
+            .then(res => (res as Promise<CepServiceResponse> ) )
+            .catch();
+
     }
 }
