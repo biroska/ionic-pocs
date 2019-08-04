@@ -29,6 +29,7 @@
 | /login | Página de login da aplicação |
 | /login/esqueci-senha | Página para cadastrar uma nova senha |
 | /menu | Acesso ao menu da aplicação |
-| /menu/crud | Acesso a funcionalidade de CRUD da aplicação |
+| /menu/crud | Acesso a menu de CRUD da aplicação |
+| /menu/crud/create-update | Acesso a página de insersão e edição de dados |
 
 **Free Software, Hell Yeah!**
