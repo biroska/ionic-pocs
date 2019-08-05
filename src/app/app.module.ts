@@ -14,6 +14,7 @@ import {FingerprintAIO} from '@ionic-native/fingerprint-aio/ngx';
 import {CepService} from './providers/cep.service';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
+import {CpfService} from './providers/cpf.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -30,6 +31,7 @@ import {HttpModule} from '@angular/http';
         SplashScreen,
         FingerprintAIO,
         CepService,
+        CpfService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

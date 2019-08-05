@@ -6,7 +6,7 @@
 
 <ion-content>
     <form [formGroup]="stepperFormGroup" #formStepper>
-        <mat-vertical-stepper formArrayName="formArray" #stepper>
+        <mat-vertical-stepper formArrayName="formArray" linear #stepper>
             <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
                 <ng-template matStepLabel>Dados Pessoais</ng-template>
                 <mat-form-field appearance="outline" class="full-width">
@@ -15,19 +15,19 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Nome</mat-label>
-                    <input matInput placeholder="Forneça o nome" formControlName="name" required>
+                    <input matInput placeholder="Forneça o nome" formControlName="name" required readonly>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Data de Nascimento</mat-label>
-                    <input matInput placeholder="Forneça a data de nascimento" formControlName="dob" required>
+                    <input matInput placeholder="Forneça a data de nascimento" formControlName="dob" required readonly>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Telefone</mat-label>
-                    <input matInput placeholder="Forneça o telefone de contato" formControlName="telephoneNumber" required>
+                    <input matInput placeholder="Forneça o telefone de contato" formControlName="telephoneNumber" required readonly>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>e-mail</mat-label>
-                    <input matInput placeholder="Forneça o e-mail de contato" formControlName="email" required>
+                    <input matInput placeholder="Forneça o e-mail de contato" formControlName="email" required readonly>
                 </mat-form-field>
                 <div>
                     <button mat-button matStepperNext type="button">Next</button>
