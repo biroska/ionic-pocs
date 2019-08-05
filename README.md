@@ -5,7 +5,8 @@
 # Problemas Conhecidos
 
   - Falta a máscara de formato nos campos, CEP, CPF, etc...
-  - A navegação do menu funciona apenas no primeiro acesso a funcionalidade, depois disso o app deve ser recarregado
+  - A navegação do menu funciona apenas no primeiro acesso a funcionalidade, depois disso o app deve ser recarregado;
+  - O modo *'linear'* do stepper não está funcionando;
 
 # Recursos disponíveis e implementações
 
