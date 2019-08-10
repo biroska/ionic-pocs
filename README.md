@@ -4,8 +4,8 @@
 
 # Problemas Conhecidos
 
-  - Falta a máscara de formato nos campos, CEP, CPF, etc...
-  - A navegação do menu funciona apenas no primeiro acesso a funcionalidade, depois disso o app deve ser recarregado
+  - A navegação do menu funciona apenas no primeiro acesso a funcionalidade, depois disso o app deve ser recarregado;
+  - O modo *'linear'* do stepper não está funcionando;
 
 # Recursos disponíveis e implementações
 
@@ -14,6 +14,7 @@
   - Leitura da impressão digital, quando o aparelho oferece o recuros, para fazer login;
   - Formulários responsivos;
   - Utilizando os componentes do Angular Material;
+  - Uso do ngx-angular-ionic para aplicar máscaras nos input fields;
 
 # Execução
   - Fazer checkout do aplicativo;
