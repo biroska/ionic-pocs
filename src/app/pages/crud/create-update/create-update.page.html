@@ -11,7 +11,7 @@
                 <ng-template matStepLabel>Dados Pessoais</ng-template>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>CPF</mat-label>
-                    <input matInput placeholder="Forneça o CPF" formControlName="cpf" required>
+                    <input matInput placeholder="Forneça o CPF" formControlName="cpf" mask="000.000.000-00"  required>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Nome</mat-label>
@@ -23,7 +23,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Telefone</mat-label>
-                    <input matInput placeholder="Forneça o telefone de contato" formControlName="telephoneNumber" required readonly>
+                    <input matInput placeholder="Forneça o telefone de contato" formControlName="telephoneNumber" mask="(99)99999-9999" required readonly>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>e-mail</mat-label>
@@ -37,7 +37,7 @@
                 <ng-template matStepLabel>Endereço</ng-template>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>CEP</mat-label>
-                    <input matInput placeholder="Informe o CEP" formControlName="cep" required>
+                    <input matInput placeholder="Informe o CEP" formControlName="cep" mask="00000-000" required>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Logradouro</mat-label>

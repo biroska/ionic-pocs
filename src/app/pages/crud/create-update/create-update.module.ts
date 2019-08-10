@@ -7,6 +7,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {CreateUpdatePage} from './create-update.page';
 import {MaterialModule} from '../../../shared/material/material.module';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 
 const routes: Routes = [
     {
@@ -21,7 +22,8 @@ const routes: Routes = [
         ReactiveFormsModule,
         IonicModule,
         MaterialModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        NgxMaskIonicModule
     ],
     declarations: [CreateUpdatePage]
 })

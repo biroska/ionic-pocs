@@ -7,6 +7,7 @@ import {IonicModule} from '@ionic/angular';
 import {LoginPage} from './login.page';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../../shared/material/material.module';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 
 const routes: Routes = [
     { path: '', component: LoginPage },

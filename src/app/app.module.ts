@@ -15,11 +15,12 @@ import {CepService} from './providers/cep.service';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {CpfService} from './providers/cpf.service';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule,
+    imports: [NgxMaskIonicModule.forRoot(),BrowserModule,
                 IonicModule.forRoot(),
                 AppRoutingModule,
                 BrowserAnimationsModule,

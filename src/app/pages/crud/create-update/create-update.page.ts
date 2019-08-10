@@ -50,13 +50,16 @@ export class CreateUpdatePage implements OnInit {
 
         cpfFormField.valueChanges.subscribe(val => {
 
-            console.log('Changes: ' + cpfFormField.value );
-
             let cpfValue = cpfFormField.value;
 
-            if ( ( cpfValue.length === 11 ) || ( cpfValue.length === 14 ) ){
+            if (  ( cpfValue.length === 14 ) ){
                 console.log( 'CPF value: ' + cpfValue + ' cpfValue.length: ' + cpfValue.length );
-                this.buscarCpfPromise( cpfValue );
+
+                var cpfSemFormatacao:string = cpfValue;
+
+                cpfSemFormatacao = cpfSemFormatacao.replace (/[\.-]/g,'');
+
+                this.buscarCpfPromise( cpfSemFormatacao );
             }
 
         });
@@ -98,6 +101,8 @@ export class CreateUpdatePage implements OnInit {
     }
 
     private buscarCpfPromise(cpf:string ) {
+
+        console.log( 'buscarCpfPromise: '+ cpf );
 
         let cpfResponse:CpfServiceResponse;
 
