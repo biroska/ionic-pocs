@@ -14,6 +14,8 @@ import {CpfServiceResponse} from '../../../providers/cpf.service.response';
 })
 export class CreateUpdatePage implements OnInit {
 
+    public isDadosCadastraisReadonly:boolean;
+
     public stepperFormGroup: FormGroup;
 
     constructor( private fBuilder: FormBuilder,
@@ -42,6 +44,9 @@ export class CreateUpdatePage implements OnInit {
         this.onCepChanges();
 
         this.onCpfChanges();
+
+        this.isDadosCadastraisReadonly = true;
+
     }
 
     onCpfChanges(): void {
@@ -108,19 +113,31 @@ export class CreateUpdatePage implements OnInit {
 
         return this.cpfService.getCpfPromise( cpf ).then((response: {}) => {
 
+            console.log('Retorno da Promise: ' + response);
 
-            console.log( response );
+            if (response) {
 
-            cpfResponse = ( response as CpfServiceResponse );
+                cpfResponse = (response as CpfServiceResponse);
 
-            let formDadosPessoais: AbstractControl | null = this.stepperFormGroup.get('formArray').get([0]);
+                let formDadosPessoais: AbstractControl | null = this.stepperFormGroup.get('formArray').get([0]);
 
-            // formDadosPessoais.get('cpf').setValue( cpfResponse.cpf ); Verificar por que causa loop
-            formDadosPessoais.get('name').setValue( cpfResponse.nome );
-            formDadosPessoais.get('dob').setValue( cpfResponse.dtNascimento );
-            formDadosPessoais.get('telephoneNumber').setValue( cpfResponse.telefone );
-            formDadosPessoais.get('email').setValue( cpfResponse.email );
+                // formDadosPessoais.get('cpf').setValue( cpfResponse.cpf ); Verificar por que causa loop
+                formDadosPessoais.get('name').setValue(cpfResponse.nome);
+                formDadosPessoais.get('dob').setValue(cpfResponse.dtNascimento);
+                formDadosPessoais.get('telephoneNumber').setValue(cpfResponse.telefone);
+                formDadosPessoais.get('email').setValue(cpfResponse.email);
+            }
+        }).catch( e => {
+                console.log( e );
+                this.clearFields( this.stepperFormGroup.get('formArray').get([0]) );
+                this.isDadosCadastraisReadonly = false;
+        } )
+    }
 
-        })
+    private clearFields(control:AbstractControl):void{
+        control.get('name').setValue( '' );
+        control.get('dob').setValue( '' );
+        control.get('telephoneNumber').setValue( '' );
+        control.get('email').setValue( '' );
     }
 }

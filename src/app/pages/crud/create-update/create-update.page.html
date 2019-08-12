@@ -15,19 +15,19 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Nome</mat-label>
-                    <input matInput placeholder="Forneça o nome" formControlName="name" required readonly>
+                    <input matInput placeholder="Forneça o nome" formControlName="name" required [readonly]="isDadosCadastraisReadonly" >
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Data de Nascimento</mat-label>
-                    <input matInput placeholder="Forneça a data de nascimento" formControlName="dob" required readonly>
+                    <input matInput placeholder="Forneça a data de nascimento" formControlName="dob" required [readonly]="isDadosCadastraisReadonly" >
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Telefone</mat-label>
-                    <input matInput placeholder="Forneça o telefone de contato" formControlName="telephoneNumber" mask="(99)99999-9999" required readonly>
+                    <input matInput placeholder="Forneça o telefone de contato" formControlName="telephoneNumber" mask="(99)99999-9999" required [readonly]="isDadosCadastraisReadonly" >
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>e-mail</mat-label>
-                    <input matInput placeholder="Forneça o e-mail de contato" formControlName="email" required readonly>
+                    <input matInput placeholder="Forneça o e-mail de contato" formControlName="email" required  [readonly]="isDadosCadastraisReadonly" >
                 </mat-form-field>
                 <div>
                     <button mat-button matStepperNext type="button">Next</button>

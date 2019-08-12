@@ -39,15 +39,15 @@ export class CpfService {
     var promise = new Promise<CpfServiceResponse>((resolve, reject) => {
 
       let cpfResponse:CpfServiceResponse = this.getPessoaFisica( cpf );
-
+      console.log('cpfResponse: ' + cpfResponse );
       if ( cpfResponse ){
+        console.log('cpfResponse valido: ' + cpfResponse );
         resolve( cpfResponse );
       } else {
+        console.log('cpfResponse null: ' + cpfResponse );
         reject( null );
       }
-
     });
-  console.log('Retornado' + promise)
     return promise;
   }
 
