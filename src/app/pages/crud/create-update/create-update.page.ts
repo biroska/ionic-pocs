@@ -15,6 +15,7 @@ import {CpfServiceResponse} from '../../../providers/cpf.service.response';
 export class CreateUpdatePage implements OnInit {
 
     public isDadosCadastraisReadonly:boolean;
+    public isDadosEnderecoReadonly:boolean;
 
     public stepperFormGroup: FormGroup;
 
@@ -46,6 +47,7 @@ export class CreateUpdatePage implements OnInit {
         this.onCpfChanges();
 
         this.isDadosCadastraisReadonly = true;
+        this.isDadosEnderecoReadonly = true;
 
     }
 
@@ -77,7 +79,7 @@ export class CreateUpdatePage implements OnInit {
 
             let cep = this.stepperFormGroup.get('formArray').get([1]).get('cep').value;
 
-            if ( cep.length === 9 ){
+            if ( cep && cep.length === 9 ){
                 this.buscarCepPromise( cep );
             }
 
@@ -88,7 +90,6 @@ export class CreateUpdatePage implements OnInit {
         let cepResponse:CepServiceResponse;
 
         return this.cepService.getCepPromise( cep ).then((response: {}) => {
-
 
             console.log( response );
 
@@ -102,7 +103,11 @@ export class CreateUpdatePage implements OnInit {
             formEndereco.get('city').setValue( cepResponse.cidade );
             formEndereco.get('state').setValue( cepResponse.uf );
 
-        })
+        }).catch( e => {
+            console.log( e );
+            this.clearDadosEndereco( this.stepperFormGroup.get('formArray').get([1]) );
+            this.isDadosEnderecoReadonly = false;
+        } )
     }
 
     private buscarCpfPromise(cpf:string ) {
@@ -113,7 +118,7 @@ export class CreateUpdatePage implements OnInit {
 
         return this.cpfService.getCpfPromise( cpf ).then((response: {}) => {
 
-            console.log('Retorno da Promise: ' + response);
+            console.log('Retorno da Promise: ' + JSON.stringify( response ) );
 
             if (response) {
 
@@ -129,15 +134,22 @@ export class CreateUpdatePage implements OnInit {
             }
         }).catch( e => {
                 console.log( e );
-                this.clearFields( this.stepperFormGroup.get('formArray').get([0]) );
+                this.clearDadosCadastrais( this.stepperFormGroup.get('formArray').get([0]) );
                 this.isDadosCadastraisReadonly = false;
         } )
     }
 
-    private clearFields(control:AbstractControl):void{
+    private clearDadosCadastrais(control:AbstractControl):void{
         control.get('name').setValue( '' );
         control.get('dob').setValue( '' );
         control.get('telephoneNumber').setValue( '' );
         control.get('email').setValue( '' );
+    }
+
+    private clearDadosEndereco(control:AbstractControl):void{
+        control.get('address').setValue( '' );
+        control.get('district').setValue( '' );
+        control.get('city').setValue( '' );
+        control.get('state').setValue( '' );
     }
 }

@@ -9,7 +9,9 @@ import {
     MatSelectModule,
     MatIconModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 } from "@angular/material";
 
 @NgModule({
@@ -23,7 +25,9 @@ import {
         MatOptionModule,
         MatSelectModule,
         MatPaginatorModule,
-        MatSortModule
+        MatSortModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ]
 })
 export class MaterialModule { }
