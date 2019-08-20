@@ -1,19 +1,21 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DateAdapter, MAT_DATE_FORMATS, MatStepper} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatStepper} from '@angular/material';
 import {CepService} from '../../../providers/cep.service';
 import {CepServiceResponse} from '../../../providers/cep.service.response';
 import {CpfService} from '../../../providers/cpf.service';
 import {CpfServiceResponse} from '../../../providers/cpf.service.response';
-import {APP_DATE_FORMATS, AppDateAdapter} from '../../../shared/material/format-datepicker';
+import {APP_DATE_FORMATS} from '../../../shared/material/format-datepicker';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
 
 @Component({
     selector: 'app-create-update',
     templateUrl: './create-update.page.html',
     styleUrls: ['./create-update.page.scss'],
     providers:[  CepService,
-                {provide: DateAdapter, useClass: AppDateAdapter},
-                {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS} ]
+                { provide: MAT_DATE_LOCALE, useValue: 'pt' }, //you can change useValue
+                { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+                { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS } ]
 })
 export class CreateUpdatePage implements OnInit {
 
