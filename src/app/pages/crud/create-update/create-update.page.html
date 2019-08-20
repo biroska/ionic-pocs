@@ -19,9 +19,9 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Data de Nascimento</mat-label>
-                    <input matInput [matDatepicker]="picker" placeholder="Forneça a data de nascimento" formControlName="dob" required [readonly]="isDadosCadastraisReadonly" >
-                    <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="isDadosCadastraisReadonly"></mat-datepicker-toggle>
-                    <mat-datepicker #picker [disabled]="isDadosCadastraisReadonly"></mat-datepicker>
+                    <input matInput [matDatepicker]="picker" placeholder="Forneça a data de nascimento" formControlName="dob" required >
+                    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                    <mat-datepicker #picker ></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Telefone</mat-label>
