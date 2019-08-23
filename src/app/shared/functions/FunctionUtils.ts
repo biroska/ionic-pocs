@@ -20,4 +20,9 @@ export class FunctionUtils {
 
         return '';
     }
+
+    static isNumber(value: string | number): boolean
+    {
+        return ((value != null) && !isNaN(Number(value.toString())));
+    }
 }

@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatStepper} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
 import {CepService} from '../../../providers/cep.service';
 import {CepServiceResponse} from '../../../providers/cep.service.response';
 import {CpfService} from '../../../providers/cpf.service';
 import {CpfServiceResponse} from '../../../providers/cpf.service.response';
 import {APP_DATE_FORMATS} from '../../../shared/material/format-datepicker';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateFormat, DateUtils} from '../../../shared/functions/DateUtils';
 
 @Component({
     selector: 'app-create-update',
@@ -133,7 +134,7 @@ export class CreateUpdatePage implements OnInit {
 
                 // formDadosPessoais.get('cpf').setValue( cpfResponse.cpf ); Verificar por que causa loop
                 formDadosPessoais.get('name').setValue(cpfResponse.nome);
-                formDadosPessoais.get('dob').setValue(cpfResponse.dtNascimento);
+                formDadosPessoais.get('dob').setValue( DateUtils.convert(cpfResponse.dtNascimento, DateFormat.ptBR)  );
                 formDadosPessoais.get('telephoneNumber').setValue(cpfResponse.telefone);
                 formDadosPessoais.get('email').setValue(cpfResponse.email);
             }
