@@ -56,7 +56,6 @@ export class DateUtils {
         }
         return dateObj;
     }
-
 }
 
 export enum DateFormat {

@@ -8,6 +8,7 @@ import {CpfServiceResponse} from '../../../providers/cpf.service.response';
 import {APP_DATE_FORMATS} from '../../../shared/material/format-datepicker';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateFormat, DateUtils} from '../../../shared/functions/DateUtils';
+import {FormatterUtils} from '../../../shared/functions/FormatterUtils';
 
 @Component({
     selector: 'app-create-update',
@@ -74,7 +75,6 @@ export class CreateUpdatePage implements OnInit {
 
                 this.buscarCpfPromise( cpfSemFormatacao );
             }
-
         });
     }
 
@@ -88,7 +88,6 @@ export class CreateUpdatePage implements OnInit {
             if ( cep && cep.length === 9 ){
                 this.buscarCepPromise( cep );
             }
-
         });
     }
 
@@ -103,7 +102,6 @@ export class CreateUpdatePage implements OnInit {
 
             let formEndereco: AbstractControl | null = this.stepperFormGroup.get('formArray').get([1]);
 
-            formEndereco.get('cep').setValue( cepResponse.cep );
             formEndereco.get('address').setValue( cepResponse.endereco );
             formEndereco.get('district').setValue( cepResponse.bairro );
             formEndereco.get('city').setValue( cepResponse.cidade );
@@ -132,10 +130,9 @@ export class CreateUpdatePage implements OnInit {
 
                 let formDadosPessoais: AbstractControl | null = this.stepperFormGroup.get('formArray').get([0]);
 
-                // formDadosPessoais.get('cpf').setValue( cpfResponse.cpf ); Verificar por que causa loop
                 formDadosPessoais.get('name').setValue(cpfResponse.nome);
                 formDadosPessoais.get('dob').setValue( DateUtils.convert(cpfResponse.dtNascimento, DateFormat.ptBR)  );
-                formDadosPessoais.get('telephoneNumber').setValue(cpfResponse.telefone);
+                formDadosPessoais.get('telephoneNumber').setValue( FormatterUtils.telephoneNumber( cpfResponse.telefone ) );
                 formDadosPessoais.get('email').setValue(cpfResponse.email);
             }
         }).catch( e => {

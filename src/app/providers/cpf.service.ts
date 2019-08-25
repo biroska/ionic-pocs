@@ -8,7 +8,7 @@ import {CEP} from '../shared/constants/Constants';
 })
 export class CpfService {
 
-  private pessoasFisicaMock =[ {cpf:'28019926828', value: new CpfServiceResponse( '28019926828', 'Aimbere Galdino', '20/01/1980', null, 'biroska@gmail.com' ) },
+  private pessoasFisicaMock =[ {cpf:'28019926828', value: new CpfServiceResponse( '28019926828', 'Aimbere Galdino', '20/01/1980', '11982718862', 'biroska@gmail.com' ) },
                                {cpf:'12345678900', value: new CpfServiceResponse( '12345678900', 'Mock Um', '29/05/1953', '11985214456', 'mock.um@gmail.com' ) },
                                {cpf:'99999999999', value: new CpfServiceResponse( '99999999999', 'Mock Dois', '23/12/2014', null, null ) } ];
 
