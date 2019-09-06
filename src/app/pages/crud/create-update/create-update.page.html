@@ -3,11 +3,12 @@
         <ion-title>create-update</ion-title>
     </ion-toolbar>
 </ion-header>
-
 <ion-content>
+
     <form [formGroup]="stepperFormGroup" #formStepper>
-        <mat-vertical-stepper formArrayName="formArray" linear #stepper>
+        <mat-vertical-stepper formArrayName="formArray" linear #stepper="matVerticalStepper">
             <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
+
                 <ng-template matStepLabel>Dados Pessoais</ng-template>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>CPF</mat-label>
@@ -15,7 +16,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Nome</mat-label>
-                    <input matInput placeholder="Forneça o nome" formControlName="name" required [readonly]="isDadosCadastraisReadonly" >
+                    <input matInput placeholder="Forneça o nome" formControlName="name" required >
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Data de Nascimento</mat-label>
@@ -43,23 +44,23 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Logradouro</mat-label>
-                    <input matInput placeholder="Informe o logradouro" formControlName="address" required readonly>
+                    <input matInput placeholder="Informe o logradouro" formControlName="address" required [readonly]="isDadosEnderecoReadonly">
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Número</mat-label>
-                    <input matInput placeholder="Informe o número" formControlName="addressNumber" required readonly>
+                    <input matInput placeholder="Informe o número" formControlName="addressNumber" required>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Bairro</mat-label>
-                    <input matInput placeholder="Informe o bairro" formControlName="district" required readonly>
+                    <input matInput placeholder="Informe o bairro" formControlName="district" required [readonly]="isDadosEnderecoReadonly">
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Cidade</mat-label>
-                    <input matInput placeholder="Informe a cidade" formControlName="city" required readonly>
+                    <input matInput placeholder="Informe a cidade" formControlName="city" required [readonly]="isDadosEnderecoReadonly">
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Estado</mat-label>
-                    <input matInput placeholder="Informe o estado" formControlName="state" required readonly>
+                    <input matInput placeholder="Informe o estado" formControlName="state" required [readonly]="isDadosEnderecoReadonly">
                 </mat-form-field>
                 <div>
                     <button mat-button matStepperPrevious type="button">Back</button>
@@ -72,6 +73,8 @@
                 <div>
                     <button mat-button matStepperPrevious type="button">Back</button>
                     <button mat-button (click)="formStepper.reset();stepper.reset();" type="button">Reset</button>
+                    <button mat-button (click)="salvar();" [disabled]="stepperFormGroup?.invalid" type="button">Salvar</button>
+                    <button mat-button (click)="log();" type="button">Validate</button>
                 </div>
             </mat-step>
         </mat-vertical-stepper>

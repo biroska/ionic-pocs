@@ -96,8 +96,5 @@ export class LoginPage extends ValidatorCommomErrors implements OnInit {
     }
 
     protected registerMessages(){
-        console.log('===========================================================');
-        console.log('=               INVOKADO NA CLASSE FILHA                  =');
-        console.log('===========================================================');
     }
 }

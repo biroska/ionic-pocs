@@ -34,7 +34,6 @@ export class MenuPage implements OnInit {
     }
 
     ngOnInit() {
-        console.log('Carregou menu');
     }
 
 }

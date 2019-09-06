@@ -72,10 +72,6 @@ export class EsqueciSenhaPage extends ValidatorCommomErrors implements OnInit {
     }
 
     protected registerMessages(){
-        console.log('===========================================================');
-        console.log('=               INVOKADO NA CLASSE FILHA                  =');
-        console.log('===========================================================');
-
         super.addErrorMessage(  'differentParameters', 'Os passwords são diferentes' );
     }
 

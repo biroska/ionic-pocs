@@ -40,8 +40,6 @@ export abstract class ValidatorCommomErrors {
 
     protected getMessage( error:string ) :string {
 
-        console.log('getMessage( ' + error + ' )');
-
         for (var i = 0; this.errorTypeMessages.length > i; i++) {
 
             let item: ErrorMessage;

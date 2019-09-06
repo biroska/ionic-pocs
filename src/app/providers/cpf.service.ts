@@ -25,8 +25,6 @@ export class CpfService {
 
     let _filter = this.pessoasFisicaMock.filter(item => item.cpf == cpf)[0];
 
-    console.log('Pessoa Encontrada: ' + _filter);
-
     if (_filter) {
       return _filter.value;
     } else {

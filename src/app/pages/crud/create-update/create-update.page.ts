@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
 import {CepService} from '../../../providers/cep.service';
 import {CepServiceResponse} from '../../../providers/cep.service.response';
@@ -9,6 +9,8 @@ import {APP_DATE_FORMATS} from '../../../shared/material/format-datepicker';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateFormat, DateUtils} from '../../../shared/functions/DateUtils';
 import {FormatterUtils} from '../../../shared/functions/FormatterUtils';
+import {forEach} from '@angular-devkit/schematics';
+import {Utils} from '../../../shared/utils/Util';
 
 @Component({
     selector: 'app-create-update',
@@ -81,8 +83,6 @@ export class CreateUpdatePage implements OnInit {
     onCepChanges(): void {
 
         this.stepperFormGroup.get('formArray').get([1]).get('cep').valueChanges.subscribe(val => {
-            console.log('Changes: ' + this.stepperFormGroup.get('formArray').get([1]).get('cep').value );
-
             let cep = this.stepperFormGroup.get('formArray').get([1]).get('cep').value;
 
             if ( cep && cep.length === 9 ){
@@ -116,13 +116,9 @@ export class CreateUpdatePage implements OnInit {
 
     private buscarCpfPromise(cpf:string ) {
 
-        console.log( 'buscarCpfPromise: '+ cpf );
-
         let cpfResponse:CpfServiceResponse;
 
         return this.cpfService.getCpfPromise( cpf ).then((response: {}) => {
-
-            console.log('Retorno da Promise: ' + JSON.stringify( response ) );
 
             if (response) {
 
@@ -154,5 +150,20 @@ export class CreateUpdatePage implements OnInit {
         control.get('district').setValue( '' );
         control.get('city').setValue( '' );
         control.get('state').setValue( '' );
+    }
+
+    public salvar(){
+        console.log('Salvar');
+    }
+
+    public log(){
+
+        console.log( this.stepperFormGroup.get('formArray').get([0]).get('cpf') );
+        console.log( this.stepperFormGroup.get('formArray').get([0]).get('name') );
+        console.log( this.stepperFormGroup.get('formArray').get([0]).get('telephoneNumber') );
+
+        let _formArray = this.stepperFormGroup.get('formArray').get([0]) as FormArray;
+
+        Utils.logControllerStateV2( _formArray );
     }
 }

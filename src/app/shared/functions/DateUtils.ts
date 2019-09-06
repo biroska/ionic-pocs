@@ -30,7 +30,6 @@ export class DateUtils {
 
         switch ( inputFormat ) {
             case DateFormat.ptBR: {
-                console.log("ptBR");
 
                 tokens = date.split('/');
 
@@ -41,7 +40,6 @@ export class DateUtils {
                 break;
             }
             case DateFormat.eng: {
-                console.log("eng");
 
                 dateObj = new Date( date );
 
@@ -50,7 +48,6 @@ export class DateUtils {
                 break;
             }
             default: {
-                console.log("Default");
                 break;
             }
         }

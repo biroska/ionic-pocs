@@ -24,8 +24,6 @@ export class AuthService {
             el => el.username === username &&
                   el.password === password
         );
-
-        console.log('isValid: ' + isValid)
         return isValid;
     }
 
