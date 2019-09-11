@@ -11,7 +11,7 @@ import {DateFormat, DateUtils} from '../../../shared/functions/DateUtils';
 import {FormatterUtils} from '../../../shared/functions/FormatterUtils';
 import {forEach} from '@angular-devkit/schematics';
 import {Utils} from '../../../shared/utils/Util';
-import {Idea, RegistrationDataService} from '../../../providers/firebase/registration-data.service';
+import {RegistrationDataService} from '../../../providers/firebase/registration-data.service';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -24,8 +24,6 @@ import {Observable} from 'rxjs';
         {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}]
 })
 export class CreateUpdatePage implements OnInit {
-
-    private ideas: Observable<Idea[]>;
 
     public isDadosCadastraisReadonly: boolean;
     public isDadosEnderecoReadonly: boolean;
@@ -167,27 +165,29 @@ export class CreateUpdatePage implements OnInit {
 
     public log() {
 
-        this.ideaService.addIdea({
+        this.ideaService.addRegistrationData({
             id: '1',
-            name: 'Galdino',
-            notes: 'Vai Firebase!!!!!'
+            personalData: {
+                id: '1',
+                cpf: '12345678900',
+                name: 'Seu Cuca',
+                dob: '23/11/1969',
+                telephoneNumber: '11123456789',
+                email: 'mr.cuca@gmail.com'
+            },
+            address: {
+                id: '1',
+                cep: '00004-xxx',
+                street: 'Harem do Cuca',
+                number: '69',
+                district: 'Luz Vermelha',
+                city: 'Sao Paulo',
+                state: 'SP'
+            }
         }).then(ok => {
             console.log('Idea added: ' + ok  );
         }, err => {
             console.log('Erro: ' + err );
         });
-
-        this.ideas = this.ideaService.getIdeas();
-
-        console.log('ideas: ' + JSON.stringify( this.ideas ) );
-        console.log(this.ideas );
-
-        console.log(this.stepperFormGroup.get('formArray').get([0]).get('cpf'));
-        console.log(this.stepperFormGroup.get('formArray').get([0]).get('name'));
-        console.log(this.stepperFormGroup.get('formArray').get([0]).get('telephoneNumber'));
-
-        let _formArray = this.stepperFormGroup.get('formArray').get([0]) as FormArray;
-
-        Utils.logControllerStateV2(_formArray);
     }
 }
