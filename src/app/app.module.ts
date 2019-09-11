@@ -16,16 +16,21 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {CpfService} from './providers/cpf.service';
 import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AngularFirestoreModule, FirestoreSettingsToken} from '@angular/fire/firestore';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [NgxMaskIonicModule.forRoot(),BrowserModule,
-                IonicModule.forRoot(),
-                AppRoutingModule,
-                BrowserAnimationsModule,
-                HttpModule,
-                HttpClientModule],
+    imports: [NgxMaskIonicModule.forRoot(), BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpModule,
+        HttpClientModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule],
     providers: [
         AuthGuard,
         StatusBar,
@@ -33,7 +38,8 @@ import {NgxMaskIonicModule} from 'ngx-mask-ionic';
         FingerprintAIO,
         CepService,
         CpfService,
-        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
+        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        {provide: FirestoreSettingsToken, useValue: {}}
     ],
     bootstrap: [AppComponent]
 })
