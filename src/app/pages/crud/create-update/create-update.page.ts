@@ -13,6 +13,9 @@ import {forEach} from '@angular-devkit/schematics';
 import {Utils} from '../../../shared/utils/Util';
 import {RegistrationDataService} from '../../../providers/firebase/registration-data.service';
 import {Observable} from 'rxjs';
+import {RegistrationDataAdapter} from '../../../adapters/RegistrationDataAdapter';
+import {RegistrationData} from '../../../providers/firebase/registraion-data';
+import {ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-create-update',
@@ -33,7 +36,8 @@ export class CreateUpdatePage implements OnInit {
     constructor(private fBuilder: FormBuilder,
                 private cepService: CepService,
                 private cpfService: CpfService,
-                private ideaService: RegistrationDataService) {
+                public toastController: ToastController,
+                private registrationDataService: RegistrationDataService) {
     }
 
     ngOnInit() {
@@ -161,33 +165,33 @@ export class CreateUpdatePage implements OnInit {
 
     public salvar() {
         console.log('Salvar');
+
+        let data:RegistrationData = RegistrationDataAdapter.fromCreateUpdatePage( this.stepperFormGroup.get('formArray') );
+
+        this.registrationDataService.addRegistrationData( data )
+            .then(ok => {
+                console.log('Idea added: ' + ok  );
+
+                this.presentToast( 'Pessoa Salva com Sucesso!', 3000, false );
+            }, err => {
+
+                console.log('Erro: ' + err );
+                this.presentToast( 'Ocorreu um erro ao salvar a Pessoa!', 3000, true );
+            });
+    }
+
+    async presentToast( message:string, duration:number, isError:boolean ) {
+
+        const toast = await this.toastController.create({
+            message: message,
+            duration: duration,
+            position: 'middle',
+            color: isError? 'danger' : 'success'
+        });
+        toast.present();
     }
 
     public log() {
 
-        this.ideaService.addRegistrationData({
-            id: '1',
-            personalData: {
-                id: '1',
-                cpf: '12345678900',
-                name: 'Seu Cuca',
-                dob: '23/11/1969',
-                telephoneNumber: '11123456789',
-                email: 'mr.cuca@gmail.com'
-            },
-            address: {
-                id: '1',
-                cep: '00004-xxx',
-                street: 'Harem do Cuca',
-                number: '69',
-                district: 'Luz Vermelha',
-                city: 'Sao Paulo',
-                state: 'SP'
-            }
-        }).then(ok => {
-            console.log('Idea added: ' + ok  );
-        }, err => {
-            console.log('Erro: ' + err );
-        });
     }
 }
